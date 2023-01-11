@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-light: #f7f1e9;
+  --color-dark: #4b4b4d;
+  --color-border: #828990;
+
+  --color-primary: #a2ab99;
+  --color-red: #ea414c;
+}
+
+html,
+body {
+  margin: 0;
+
+  height: 100%;
+  width: 100%;
+
+  /* For the sake of simplicity, we're going to center everything */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
