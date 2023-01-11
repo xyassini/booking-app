@@ -6,4 +6,4 @@ import { BookingItemComponent } from './booking-item/booking-item.component';
   declarations: [BookingItemComponent],
   imports: [CommonModule],
 })
-export class ComponentsModule {}
+export class BookingComponentsModule {}
