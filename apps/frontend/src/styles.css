@@ -1,4 +1,6 @@
 :root {
+  font-family: 'Inter', sans-serif;
+
   --color-light: #f7f1e9;
   --color-dark: #4b4b4d;
   --color-border: #828990;
