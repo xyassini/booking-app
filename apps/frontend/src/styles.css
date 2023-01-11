@@ -24,3 +24,20 @@ body {
   background-color: var(--color-light);
   color: var(--color-dark);
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-primary {
+  border: none;
+  padding: 1rem 1.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  text-transform: uppercase;
+
+  font-size: 1rem;
+  font-weight: 500;
+}
