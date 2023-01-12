@@ -1,52 +1,119 @@
 <h2>Book your suite at limehome</h2>
-<hr />
-<form>
+<hr/>
+<form class="form-grid" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div>
-    <label for="dates">Check-in/out dates</label>
-    <input type="text" id="dates" name="dates" />
+    <label for="dates" class="form-label">Check-in/out dates</label>
+    <input type="text" id="dates" name="dates" class="form-control" #datepicker/>
   </div>
 
   <div>
-    <label for="guests">Number of guests</label>
-    <input type="number" id="guests" name="guests" />
+    <label for="guests" class="form-label">Number of guests</label>
+    <input type="number" id="guests" class="form-control" name="guests" formControlName="guestCount" required min="1"
+           max="4"/>
+    <div class="error-message"
+         *ngIf="form.controls.guestCount.invalid && (form.controls.guestCount.dirty || form.controls.guestCount.touched)">
+      <div *ngIf="form.controls.guestCount.errors?.['isNotEmpty']">Please enter a number</div>
+      <div *ngIf="form.controls.guestCount.errors?.['isInt']">The value must be a number</div>
+      <div *ngIf="form.controls.guestCount.errors?.['min']">At least one guest required</div>
+      <div *ngIf="form.controls.guestCount.errors?.['max']">This apartment allows only up to 4 guests</div>
+    </div>
   </div>
 
-  <div>
-    <label for="firstName">First Name</label>
-    <input type="text" id="firstName" name="firstName" />
-  </div>
+  <ng-container formGroupName="user">
+    <div>
+      <label for="firstName" class="form-label">First Name</label>
+      <input type="text" id="firstName" class="form-control" name="firstName" formControlName="firstName"
+             placeholder="First Name"/>
+      <div class="error-message"
+           *ngIf="form.controls.user.controls.firstName.invalid && (form.controls.user.controls.firstName.dirty || form.controls.user.controls.firstName.touched)">
+        <div *ngIf="form.controls.user.controls.firstName.errors?.['isNotEmpty']">Please enter your first name</div>
+      </div>
+    </div>
 
-  <div>
-    <label for="lastName">Last Name</label>
-    <input type="text" id="lastName" name="lastName" />
-  </div>
+    <div>
+      <label for="lastName" class="form-label">Last Name</label>
+      <input type="text" id="lastName" class="form-control" name="lastName" formControlName="lastName"
+             placeholder="Last Name"/>
+      <div class="error-message"
+           *ngIf="form.controls.user.controls.lastName.invalid && (form.controls.user.controls.lastName.dirty || form.controls.user.controls.lastName.touched)">
+        <div *ngIf="form.controls.user.controls.lastName.errors?.['isNotEmpty']">Please enter your last name</div>
+      </div>
+    </div>
 
-  <div>
-    <label for="address">Billing Address</label>
-    <input type="text" id="address" name="address">
-  </div>
+    <div>
+      <label for="address" class="form-label">Billing Address</label>
+      <input type="text" id="address" class="form-control" name="address" formControlName="address"
+             placeholder="Billing Address"/>
+      <div class="error-message"
+           *ngIf="form.controls.user.controls.address.invalid && (form.controls.user.controls.address.dirty || form.controls.user.controls.address.touched)">
+        <div *ngIf="form.controls.user.controls.address.errors?.['isNotEmpty']">Please enter a billing address</div>
+      </div>
+    </div>
 
-  <div>
-    <label for="country">Billing Country</label>
-    <input type="text" id="country" name="country">
-  </div>
+    <div>
+      <label for="country" class="form-label">Billing Country</label>
+      <select id="country" class="form-control" name="country" formControlName="country" style="width: 100%;">
+        <option value="" disabled selected>Select Country...</option>
+        <option value="DE">Germany</option>
+        <option value="US">United States</option>
+        <option value="CA">Canada</option>
+        <option value="MX">Mexico</option>
+      </select>
+      <div class="error-message"
+           *ngIf="form.controls.user.controls.country.invalid && (form.controls.user.controls.country.dirty || form.controls.user.controls.country.touched)">
+        <div *ngIf="form.controls.user.controls.country.errors?.['isNotEmpty']">Please enter the billing country</div>
+      </div>
+    </div>
 
-  <div>
-    <label for="postalCode">Postal Code</label>
-    <input type="text" id="postalCode" name="postalCode">
-  </div>
+    <div>
+      <label for="postalCode" class="form-label">Postal Code</label>
+      <input type="text" id="postalCode" class="form-control" name="postalCode" formControlName="postalCode"
+             placeholder="Postal Code"/>
+      <div class="error-message"
+           *ngIf="form.controls.user.controls.postalCode.invalid && (form.controls.user.controls.postalCode.dirty || form.controls.user.controls.postalCode.touched)">
+        <div *ngIf="form.controls.user.controls.postalCode.errors?.['isNotEmpty']">Please enter a postal code</div>
+      </div>
+    </div>
 
-  <div>
-    <label for="email">Email</label>
-    <input type="text" id="email" name="email">
-  </div>
+    <div>
+      <label for="city" class="form-label">City</label>
+      <input type="text" id="city" class="form-control" name="city" formControlName="city" placeholder="City"/>
+      <div class="error-message"
+           *ngIf="form.controls.user.controls.city.invalid && (form.controls.user.controls.city.dirty || form.controls.user.controls.city.touched)">
+        <div *ngIf="form.controls.user.controls.city.errors?.['isNotEmpty']">Please enter a city</div>
+      </div>
+    </div>
 
-  <div>
-    <label for="phone">Phone</label>
-    <input type="text" id="phone" name="phone">
-  </div>
+    <div>
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" class="form-control" name="email" formControlName="email"
+             placeholder="your@email.com"/>
+      <div class="error-message"
+           *ngIf="form.controls.user.controls.email.invalid && (form.controls.user.controls.email.dirty || form.controls.user.controls.email.touched)">
+        <div *ngIf="form.controls.user.controls.email.errors?.['isNotEmpty']">Please enter your email address</div>
+        <div
+          *ngIf="form.controls.user.controls.email.errors?.['isEmail'] && !form.controls.user.controls.email.errors?.['isNotEmpty']">
+          Email address is not valid
+        </div>
+      </div>
+    </div>
 
-  <button type="submit">
+    <div>
+      <label for="phone" class="form-label">Phone number</label>
+      <input type="text" id="phone" class="form-control" name="phone" formControlName="phone"
+             placeholder="Your Phone number"/>
+      <div class="error-message"
+           *ngIf="form.controls.user.controls.phone.invalid && (form.controls.user.controls.phone.dirty || form.controls.user.controls.phone.touched)">
+        <div *ngIf="form.controls.user.controls.phone.errors?.['isNotEmpty']">Please enter your phone number</div>
+        <div
+          *ngIf="form.controls.user.controls.phone.errors?.['matches'] && !form.controls.user.controls.phone.errors?.['isNotEmpty']">
+          Phone number is not valid
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <button type="submit" class="btn-primary" style="width: 50%">
     Book now
   </button>
 </form>
