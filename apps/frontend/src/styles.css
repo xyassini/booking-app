@@ -3,10 +3,14 @@
 
   --color-light: #f7f1e9;
   --color-dark: #4b4b4d;
-  --color-border: #828990;
+  --color-border: #989da0;
 
+  --color-primary-light: #f7f1e9;
   --color-primary: #a2ab99;
+  --color-primary-dark: #818a78;
   --color-red: #ea414c;
+
+  --color-lightgray: #aaa;
 }
 
 html,
@@ -15,6 +19,8 @@ body {
 
   height: 100%;
   width: 100%;
+
+  box-sizing: border-box;
 
   /* For the sake of simplicity, we're going to center everything */
   display: flex;
@@ -25,6 +31,12 @@ body {
   color: var(--color-dark);
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -33,11 +45,59 @@ body {
 
 .btn-primary {
   border: none;
+  text-decoration: none;
   padding: 1rem 1.5rem;
   background-color: var(--color-primary);
   color: var(--color-light);
   text-transform: uppercase;
+  cursor: pointer;
 
   font-size: 1rem;
   font-weight: 500;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-primary:disabled {
+  background-color: var(--color-lightgray);
+  cursor: not-allowed;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-control {
+  border: 2px solid var(--color-border);
+  background-color: var(--color-light);
+  padding: 1rem;
+  width: 100%;
+}
+
+.form-control.ng-invalid.ng-touched {
+  border-color: var(--color-red);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.form-control::placeholder {
+  color: var(--color-lightgray);
+}
+
+.error-message {
+  color: var(--color-red);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
 }
