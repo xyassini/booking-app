@@ -1,1 +1,18 @@
-<p>bookings works!</p>
+<div class="header">
+  <h2>Bookings</h2>
+  <a routerLink="/create" class="btn-primary">
+    Create Booking
+  </a>
+</div>
+
+<ng-container *ngIf="(bookings$ | async)?.length; else empty">
+  <div *ngFor="let booking of bookings$ | async">
+    <p>{{booking.id}}</p>
+  </div>
+</ng-container>
+
+<ng-template #empty>
+  <p>
+    There are no bookings
+  </p>
+</ng-template>
