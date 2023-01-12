@@ -16,10 +16,12 @@ import {Type} from "class-transformer";
 export class CreateBookingDto implements Omit<Prisma.BookingCreateInput, 'user'> {
   @IsNotEmpty()
   @IsDate()
+  @Type(() => Date)
   from!: Date;
 
   @IsNotEmpty()
   @IsDate()
+  @Type(() => Date)
   to!: Date;
 
   @IsNotEmpty()

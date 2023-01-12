@@ -1,7 +1,8 @@
 import {Prisma} from "@prisma/client";
-import {IsEmail, IsNotEmpty, IsString} from "class-validator";
+import {IsEmail, IsNotEmpty, IsString, Matches, MaxLength, MinLength} from "class-validator";
 
 export class CreateUserDto implements Prisma.UserCreateInput {
+  @IsNotEmpty()
   @IsEmail()
   email!: string;
 
@@ -31,5 +32,6 @@ export class CreateUserDto implements Prisma.UserCreateInput {
 
   @IsString()
   @IsNotEmpty()
+  @Matches(/^(\+|\d)[1-9 ][0-9 \-().]{7,32}$/)
   phone!: string;
 }
