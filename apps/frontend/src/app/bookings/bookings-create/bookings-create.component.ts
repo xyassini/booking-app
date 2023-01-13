@@ -4,6 +4,7 @@ import {ClassValidatorFormControl, ClassValidatorFormGroup} from "ngx-reactive-f
 import {CreateBookingDto, CreateUserDto} from "@booking-app/dto";
 import {BookingsService} from "../bookings.service";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'booking-app-bookings-create',
@@ -31,7 +32,7 @@ export class BookingsCreateComponent implements AfterViewInit {
 
   loading = false;
 
-  constructor(private bookingsService: BookingsService, private router: Router, private ref: ChangeDetectorRef) {
+  constructor(private bookingsService: BookingsService, private router: Router, private toastr: ToastrService) {
   }
 
   ngAfterViewInit() {
@@ -64,8 +65,8 @@ export class BookingsCreateComponent implements AfterViewInit {
         this.router.navigate(['/confirm', res.id]);
       },
       error: err => {
-        // TODO: add error toast
-        console.error('=> err', err);
+        console.error('Error:', err);
+        this.toastr.error('Something went wrong, please try again later.')
         this.loading = false;
       }
     })
