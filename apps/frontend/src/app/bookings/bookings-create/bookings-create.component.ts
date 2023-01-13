@@ -54,13 +54,11 @@ export class BookingsCreateComponent implements AfterViewInit {
 
   onSubmit() {
     if (this.form.invalid) {
-      console.log("form", this.form);
       this.form.markAllAsTouched();
       return
     }
     this.loading = true;
 
-    // TODO: disable button while loading
     this.bookingsService.create(this.form.value as CreateBookingDto).subscribe({
       next: res => {
         this.router.navigate(['/confirm', res.id]);
