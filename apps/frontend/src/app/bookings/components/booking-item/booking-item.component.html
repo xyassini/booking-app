@@ -1,1 +1,30 @@
-<p>booking-item works!</p>
+<div class="card">
+  <div>
+    <h4 class="booking-title">{{booking.guestCount}} guests</h4>
+    <div class="subtitle">
+      {{booking.from | date}} - {{booking.to | date}}
+    </div>
+    <a class="btn-link" [routerLink]="['/confirm', booking.id]">
+      Open confirmation
+    </a>
+  </div>
+  <div class="booking-details">
+    <div>
+      <div>
+        {{booking.user.firstName}} {{booking.user.lastName}}
+      </div>
+      <div>
+        {{booking.user.email}}
+      </div>
+      <div>
+        {{booking.user.phone}}
+      </div>
+      <div>
+        {{booking.user.address}}
+      </div>
+      <div>
+        {{booking.user.postalCode}} {{booking.user.city}}, {{booking.user.country}}
+      </div>
+    </div>
+  </div>
+</div>

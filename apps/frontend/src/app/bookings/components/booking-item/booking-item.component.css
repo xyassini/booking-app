@@ -1,0 +1,12 @@
+.booking-title {
+  margin-bottom: .2rem;
+  font-weight: 600;
+}
+
+.booking-details {
+  display: flex;
+  font-size: .8rem;
+  color: var(--color-border);
+}
+
+

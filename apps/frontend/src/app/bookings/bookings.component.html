@@ -7,9 +7,7 @@
 
 <ng-container *ngIf="(bookings$ | async) as bookings; else loading">
   <ng-container *ngIf="bookings.length; else empty">
-    <div *ngFor="let booking of bookings">
-      <p>{{booking.id}}</p>
-    </div>
+    <booking-app-booking-item *ngFor="let booking of bookings" [booking]="booking"></booking-app-booking-item>
   </ng-container>
 
   <ng-template #empty>
