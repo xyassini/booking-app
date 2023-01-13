@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post} from '@nestjs/common';
 import {BookingsService} from "./bookings.service";
 import {CreateBookingDto} from "@booking-app/dto";
 
@@ -10,6 +10,11 @@ export class BookingsController {
   @Get()
   async getAll() {
     return this.bookingsService.getAll();
+  }
+
+  @Get(':id')
+  async getOne(@Param('id') id: string) {
+    return this.bookingsService.getOne(id);
   }
 
   @Post()

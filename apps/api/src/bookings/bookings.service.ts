@@ -21,6 +21,17 @@ export class BookingsService {
     });
   }
 
+  async getOne(id: string): Promise<Booking & { user: User }> {
+    return this.prisma.booking.findUnique({
+      where: {
+        id
+      },
+      include: {
+        user: true
+      }
+    });
+  }
+
   /**
    * Create a new booking, additionally creates a new user if the email is not already taken,
    * otherwise it will use the existing user
