@@ -1,6 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {PrismaService} from "../shared/prisma.service";
 import {CreateBookingDto} from "@booking-app/dto";
+import {Booking, User} from "@prisma/client";
 
 @Injectable()
 export class BookingsService {
@@ -10,19 +11,23 @@ export class BookingsService {
 
   /**
    * Get all bookings
-   * @returns {Promise<Booking[]>} - all bookings
+   * @returns {Promise<Array<Booking & { user: User }>>} - all bookings
    */
-  async getAll() {
-    return this.prisma.booking.findMany();
+  async getAll(): Promise<Array<Booking & { user: User }>> {
+    return this.prisma.booking.findMany({
+      include: {
+        user: true
+      }
+    });
   }
 
   /**
    * Create a new booking, additionally creates a new user if the email is not already taken,
    * otherwise it will use the existing user
    * @param {CreateBookingDto} data - booking with nested user
-   * @returns {Promise<Booking>} - created booking
+   * @returns {Promise<Booking & { user: User }>} - created booking
    */
-  async create(data: CreateBookingDto) {
+  async create(data: CreateBookingDto): Promise<Booking & { user: User }> {
     return this.prisma.booking.create({
       data: {
         ...data,
@@ -35,6 +40,9 @@ export class BookingsService {
           }
         }
       },
+      include: {
+        user: true
+      }
     });
   }
 }
