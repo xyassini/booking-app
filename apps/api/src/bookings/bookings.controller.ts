@@ -14,6 +14,6 @@ export class BookingsController {
 
   @Post()
   async create(@Body() data: CreateBookingDto) {
-    return await this.bookingsService.create(data);
+    return this.bookingsService.create(data);
   }
 }
