@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {BookingsComponent} from "./bookings.component";
 import {BookingsCreateComponent} from "./bookings-create/bookings-create.component";
+import {BookingsConfirmComponent} from "./bookings-confirm/bookings-confirm.component";
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: BookingsCreateComponent
+  },
+  {
+    path: 'confirm/:id',
+    component: BookingsConfirmComponent
   }
 ];
 
@@ -18,4 +23,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class BookingsRoutingModule { }
+export class BookingsRoutingModule {
+}

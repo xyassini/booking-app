@@ -1,0 +1,12 @@
+<ng-container *ngIf="(booking$ | async) as booking">
+  <h1>Congratulations, {{booking.user.firstName}}!</h1>
+  <p class="confirm-subtitle">
+    Your booking for {{booking.guestCount}} guests on {{booking.from | date}} until {{booking.to | date}} is confirmed!
+  </p>
+  <a class="btn-link" [routerLink]="['/']">
+    See all bookings
+  </a>
+  <a class="btn-link" [routerLink]="['/create']">
+    Create new booking &rarr;
+  </a>
+</ng-container>

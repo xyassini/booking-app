@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
 import {Litepicker} from "litepicker";
 import {ClassValidatorFormControl, ClassValidatorFormGroup} from "ngx-reactive-form-class-validator";
 import {CreateBookingDto, CreateUserDto} from "@booking-app/dto";
 import {BookingsService} from "../bookings.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'booking-app-bookings-create',
@@ -28,7 +29,9 @@ export class BookingsCreateComponent implements AfterViewInit {
     })
   });
 
-  constructor(private bookingsService: BookingsService) {
+  loading = false;
+
+  constructor(private bookingsService: BookingsService, private router: Router, private ref: ChangeDetectorRef) {
   }
 
   ngAfterViewInit() {
@@ -51,12 +54,22 @@ export class BookingsCreateComponent implements AfterViewInit {
 
   onSubmit() {
     if (this.form.invalid) {
-      // mark all form inputs as touched
+      console.log("form", this.form);
       this.form.markAllAsTouched();
       return
     }
-    this.bookingsService.create(this.form.value as CreateBookingDto).subscribe(res => {
-      console.log('=> res', res);
+    this.loading = true;
+
+    // TODO: disable button while loading
+    this.bookingsService.create(this.form.value as CreateBookingDto).subscribe({
+      next: res => {
+        this.router.navigate(['/confirm', res.id]);
+      },
+      error: err => {
+        // TODO: add error toast
+        console.error('=> err', err);
+        this.loading = false;
+      }
     })
   }
 }
