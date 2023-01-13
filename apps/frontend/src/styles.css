@@ -31,6 +31,10 @@ body {
   color: var(--color-dark);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
 *,
 *:before,
 *:after {
@@ -41,6 +45,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 2rem;
 }
 
 .btn-primary {
@@ -56,13 +61,24 @@ body {
   font-weight: 500;
 }
 
-.btn-primary:hover:not(:disabled) {
+.btn-primary:hover {
   background-color: var(--color-primary-dark);
 }
 
-.btn-primary:disabled {
-  background-color: var(--color-lightgray);
-  cursor: not-allowed;
+.btn-link {
+  display: block;
+  margin-top: .5rem;
+  border: none;
+  text-decoration: none;
+  background-color: transparent;
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  font-size: .8rem;
+  font-weight: 500;
+}
+
+.btn-link:hover {
+  color: var(--color-primary);
 }
 
 .form-grid {
@@ -100,6 +116,23 @@ body {
   color: var(--color-red);
   font-size: 0.8rem;
   margin-top: 0.25rem;
+}
+
+.subtitle {
+  font-size: .8rem;
+  font-weight: 500;
+  color: var(--color-border);
+}
+
+.card {
+  margin: 0 0 20px 0;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ccc;
 }
 
 hr {
