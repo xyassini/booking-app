@@ -14,7 +14,7 @@ export class BookingsCreateComponent implements AfterViewInit {
 
   form = new ClassValidatorFormGroup(CreateBookingDto, {
     from: new ClassValidatorFormControl(new Date()),
-    to: new ClassValidatorFormControl(new Date()),
+    to: new ClassValidatorFormControl(new Date(new Date().setDate(new Date().getDate() + 3))),
     guestCount: new ClassValidatorFormControl(2),
     user: new ClassValidatorFormGroup(CreateUserDto, {
       email: new ClassValidatorFormControl(''),
@@ -41,9 +41,9 @@ export class BookingsCreateComponent implements AfterViewInit {
       minDate: new Date(),
       minDays: 2,
       setup: (picker) => {
-        picker.on('select', (fromDate, toDate) => {
-          this.form.controls.from.setValue(fromDate);
-          this.form.controls.to.setValue(toDate);
+        picker.on('selected', (fromDate, toDate) => {
+          this.form.controls.from.setValue(fromDate.dateInstance);
+          this.form.controls.to.setValue(toDate.dateInstance);
         })
       }
     })
