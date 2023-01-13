@@ -5,14 +5,23 @@
   </a>
 </div>
 
-<ng-container *ngIf="(bookings$ | async)?.length; else empty">
-  <div *ngFor="let booking of bookings$ | async">
-    <p>{{booking.id}}</p>
-  </div>
+<ng-container *ngIf="(bookings$ | async) as bookings; else loading">
+  <ng-container *ngIf="bookings.length; else empty">
+    <div *ngFor="let booking of bookings">
+      <p>{{booking.id}}</p>
+    </div>
+  </ng-container>
+
+  <ng-template #empty>
+    <p>
+      There are no bookings
+    </p>
+  </ng-template>
 </ng-container>
 
-<ng-template #empty>
+<ng-template #loading>
   <p>
-    There are no bookings
+    Loading...
   </p>
 </ng-template>
+
